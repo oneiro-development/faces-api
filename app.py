@@ -24,7 +24,15 @@ def upload_image():
         # append the ndarray to the list
         img_arrays.append(img_array)
 
-    return jsonify(any(faces.compare_faces2(img_arrays[0], img_arrays[1]))), 200
+    def try_compare_faces():
+        # try to compare the faces in the images
+        # if there is an error, return False
+        try:
+            return any(faces.compare_faces2(img_arrays[0], img_arrays[1]))
+        except:
+            return False
+
+    return jsonify(try_compare_faces()), 200
 
 if __name__ == '__main__':
     app.run(port=5001)
