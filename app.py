@@ -34,5 +34,9 @@ def upload_image():
 
     return jsonify(try_compare_faces()), 200
 
+@app.route('/health', methods=['GET'])
+def health_check():
+    return jsonify(True), 200
+
 if __name__ == '__main__':
     app.run(port=5001)
